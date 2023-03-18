@@ -20,7 +20,7 @@ body {
 .preview {
   background: #f9fafd;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   width: 100%;
 }
@@ -88,9 +88,16 @@ input[type="radio"] {
   margin-bottom: 20px;
 }
 
-/* CARD SECTION */
+/* GRID LAYOUT */
+.card-container {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  grid-template-columns: minmax(300px, 450px);
+}
+
+/* CARD LAYOUT */
 .card {
-  width: 500px;
   border: 1px solid lightgray;
   padding: 15px;
 }
@@ -111,6 +118,7 @@ input[type="radio"] {
 
 .name-date-container {
   flex-grow: 1;
+  margin-right: 15px;
 }
 
 .username {
@@ -129,7 +137,7 @@ input[type="radio"] {
 }
 
 .post-image {
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
   display: flex;
@@ -137,8 +145,19 @@ input[type="radio"] {
   justify-content: center;
 }
 
+.post-image img {
+  max-width: 150%;
+}
+
 .text-container {
   margin-bottom: 20px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .horizontal-line {
@@ -153,4 +172,20 @@ input[type="radio"] {
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
+}
+
+@media only screen and (min-width: 769px) {
+  .card-container {
+    /* grid-template-columns: repeat(2, minmax(250px, 1fr)); */
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  /* .card-container {
+    grid-template-columns: repeat(5, minmax(300px, 450px));
+  } */
 }
