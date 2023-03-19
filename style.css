@@ -1,3 +1,9 @@
+:root {
+  --cards-number: 2;
+  --grid-gap: 10px;
+  --grid-padding: 10px;
+}
+
 *,
 body {
   padding: 0;
@@ -28,6 +34,7 @@ body {
 .layout-placeholder {
   color: #464b5b;
   font-size: 18px;
+  width: 100%;
 }
 
 .accordion {
@@ -89,11 +96,49 @@ input[type="radio"] {
 }
 
 /* GRID LAYOUT */
-.card-container {
+.card-container.dynamic {
   display: grid;
-  gap: 10px;
   padding: 10px;
-  grid-template-columns: minmax(300px, 450px);
+  gap: 10px;
+  --max-gap-width: calc(4 * 10px);
+  --max-columns-width: calc(5 * 450px);
+  --max-padding: calc(2 * 10px);
+  --max-grid-width: calc(
+    (var(--max-columns-width) + var(--max-gap-width)) + var(--max-padding)
+  );
+  max-width: var(--max-grid-width);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, calc(var(--max-columns-width) / 5))
+  );
+  justify-content: center;
+}
+
+.card-container.static {
+  padding: 10px;
+  --grid-layout-gap: 10px;
+  --grid-column-count: var(--cards-number);
+  --grid-item--min-width: 100px;
+
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: min(
+    450px,
+    calc((100% - var(--total-gap-width)) / var(--grid-column-count))
+  );
+
+  display: grid;
+  margin: auto;
+  --max-grid-width: calc(
+    (var(--grid-column-count) * var(--grid-item--max-width)) +
+      var(--total-gap-width)
+  );
+  max-width: var(--max-grid-width);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
+  );
+  grid-gap: var(--grid-layout-gap);
 }
 
 /* CARD LAYOUT */
@@ -105,20 +150,20 @@ input[type="radio"] {
 .card-heading {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
 .profile-img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 15px;
 }
 
 .name-date-container {
   flex-grow: 1;
-  margin-right: 15px;
 }
 
 .username {
@@ -172,20 +217,4 @@ input[type="radio"] {
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
-}
-
-@media only screen and (min-width: 769px) {
-  .card-container {
-    /* grid-template-columns: repeat(2, minmax(250px, 1fr)); */
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .card-container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  /* .card-container {
-    grid-template-columns: repeat(5, minmax(300px, 450px));
-  } */
 }
