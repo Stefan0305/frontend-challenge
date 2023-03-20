@@ -32,9 +32,11 @@ body {
 }
 
 .layout-placeholder {
+  background-color: #f9fafd;
   color: #464b5b;
   font-size: 18px;
   width: 100%;
+  height: min-content;
 }
 
 .accordion {
@@ -96,6 +98,10 @@ input[type="radio"] {
 }
 
 /* GRID LAYOUT */
+.card-container {
+  background: #f9fafd;
+}
+
 .card-container.dynamic {
   display: grid;
   padding: 10px;
@@ -182,6 +188,7 @@ input[type="radio"] {
 }
 
 .post-image {
+  aspect-ratio: 1 / 1;
   max-width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
@@ -217,4 +224,19 @@ input[type="radio"] {
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
+}
+
+.load-card-btn {
+  padding: 20px 15px;
+  background-color: #0081ff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
 }

@@ -1,8 +1,13 @@
+import data from "./data.json" assert { type: "json" };
 let columSizeEl = document.getElementById("numberOfColumns");
 let cardContainer = document.getElementById("card-container");
 var rootEl = document.querySelector(":root");
 let cardsToShow = "dynamic";
 
+// loading cards data from JSON to local variable
+var localData = data;
+
+// deciding number of grid columns
 function dropdownHandler() {
   // just update global variable
   cardsToShow = columSizeEl.value;
@@ -42,3 +47,53 @@ function resizeHandler() {
   }
 }
 window.addEventListener("resize", resizeHandler);
+
+// cards loading
+let loadCardsBtn = document.getElementById("load-card-btn");
+loadCardsBtn.addEventListener("click", loadFourCards);
+let currentCardPointer = 0;
+
+function loadFourCards() {
+  for (let i = 0; i < 4; i++) {
+    let cardData = localData[currentCardPointer];
+
+    // hiding Load More button when all cards are loaded
+    if (cardData === undefined) {
+      loadCardsBtn.style.visibility = "hidden";
+      return;
+    }
+
+    let card = document.createElement("div");
+    card.innerHTML = `
+    <div class="card-heading">
+        <img class="profile-img" src="${cardData.profile_image}"></img>
+        <div class="name-date-container">
+            <p class="username">${cardData.name}</p>
+            <p class="post-date">${cardData.date}</p>
+        </div>
+        <img class="social-network" src=${
+          cardData.source_type === "facebook"
+            ? "./icons/facebook.svg"
+            : "./icons/instagram-logo.svg"
+        }></img>
+    </div>
+    <div class="post-image">
+        <img src=${cardData.image}></img>
+    </div>
+    <div class="text-container">
+        <p>${cardData.caption}</p>
+    </div>
+    <div class="horizontal-line"></div>
+    <div class="hearts-container">
+        <img src="./icons/heart.svg" alt="heart">
+        <span>0</span>
+    </div>
+    `;
+
+    card.classList.add("card");
+    cardContainer.appendChild(card);
+    currentCardPointer++;
+  }
+}
+
+loadFourCards();
