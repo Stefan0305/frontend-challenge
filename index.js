@@ -66,6 +66,34 @@ function colorInputHandler() {
   rootEl.style.setProperty("--card-bg-color", colorInput.value);
 }
 
+// filter by source functionality
+let radioBtns = document.getElementsByName("filterBySource");
+
+for (let i = 0; i < radioBtns.length; i++) {
+  radioBtns[i].addEventListener("click", filterBySource);
+}
+
+function filterBySource() {
+  let cards = document.querySelectorAll(".card");
+  let selectedFilter = document.querySelector(
+    'input[name="filterBySource"]:checked'
+  ).value;
+
+  if (selectedFilter === "all") {
+    cards.forEach((card) => {
+      card.style.display = "block";
+    });
+  } else {
+    cards.forEach((card) => {
+      if (card.classList.contains(`${selectedFilter}`)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+}
+
 // cards loading
 let loadCardsBtn = document.getElementById("load-card-btn");
 loadCardsBtn.addEventListener("click", loadFourCards);
@@ -109,6 +137,7 @@ function loadFourCards() {
     `;
 
     card.classList.add("card");
+    card.classList.add(`${cardData.source_type}`);
     cardContainer.appendChild(card);
     currentCardPointer++;
   }
