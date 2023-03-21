@@ -58,6 +58,14 @@ function gapDropdownHandler() {
   rootEl.style.setProperty("--grid-gap", gapValue);
 }
 
+// change background color of cards functionality
+let colorInput = document.getElementById("cardBackgroundColor");
+colorInput.addEventListener("input", colorInputHandler);
+
+function colorInputHandler() {
+  rootEl.style.setProperty("--card-bg-color", colorInput.value);
+}
+
 // cards loading
 let loadCardsBtn = document.getElementById("load-card-btn");
 loadCardsBtn.addEventListener("click", loadFourCards);
