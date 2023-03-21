@@ -1,6 +1,7 @@
 import data from "./data.json" assert { type: "json" };
 var rootEl = document.querySelector(":root");
 let cardContainer = document.getElementById("card-container");
+let cards = document.querySelectorAll(".card");
 
 // loading cards data from JSON to local variable
 var localData = data;
@@ -67,14 +68,13 @@ function colorInputHandler() {
 }
 
 // filter by source functionality
-let radioBtns = document.getElementsByName("filterBySource");
+let filterBySrcRadioBtns = document.getElementsByName("filterBySource");
 
-for (let i = 0; i < radioBtns.length; i++) {
-  radioBtns[i].addEventListener("click", filterBySource);
+for (let i = 0; i < filterBySrcRadioBtns.length; i++) {
+  filterBySrcRadioBtns[i].addEventListener("click", filterBySource);
 }
 
 function filterBySource() {
-  let cards = document.querySelectorAll(".card");
   let selectedFilter = document.querySelector(
     'input[name="filterBySource"]:checked'
   ).value;
@@ -91,6 +91,27 @@ function filterBySource() {
         card.style.display = "none";
       }
     });
+  }
+}
+
+// toggle dark/light mode functionality
+let modeRadioBtns = document.getElementsByName("theme");
+
+for (let i = 0; i < modeRadioBtns.length; i++) {
+  modeRadioBtns[i].addEventListener("click", toggleMode);
+}
+
+function toggleMode() {
+  let selectedMode = document.querySelector(
+    'input[name="theme"]:checked'
+  ).value;
+
+  if (selectedMode === "darkTheme") {
+    rootEl.style.setProperty("--card-bg-clr", "#000");
+    rootEl.style.setProperty("--card-text-clr", "#fff");
+  } else {
+    rootEl.style.setProperty("--card-bg-clr", "#fff");
+    rootEl.style.setProperty("--card-text-clr", "#000");
   }
 }
 

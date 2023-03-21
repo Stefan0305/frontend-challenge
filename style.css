@@ -2,7 +2,8 @@
   --cards-number: 2;
   --grid-gap: 10px;
   --grid-padding: 10px;
-  --card-bg-color: #ffffff;
+  --card-bg-clr: #ffffff;
+  --card-text-clr: #000000;
 }
 
 *,
@@ -153,7 +154,8 @@ input[type="radio"] {
 .card {
   border: 1px solid lightgray;
   padding: 15px;
-  background-color: var(--card-bg-color);
+  background-color: var(--card-bg-clr);
+  color: var(--card-text-clr);
 }
 
 .card-heading {
