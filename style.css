@@ -105,8 +105,9 @@ input[type="radio"] {
 .card-container.dynamic {
   display: grid;
   padding: 10px;
-  gap: 10px;
-  --max-gap-width: calc(4 * 10px);
+  margin: auto;
+  gap: var(--grid-gap);
+  --max-gap-width: calc(4 * var(--grid-gap));
   --max-columns-width: calc(5 * 450px);
   --max-padding: calc(2 * 10px);
   --max-grid-width: calc(
@@ -122,12 +123,12 @@ input[type="radio"] {
 
 .card-container.static {
   padding: 10px;
-  --grid-layout-gap: 10px;
+  /* --grid-layout-gap: 10px; */
   --grid-column-count: var(--cards-number);
   --grid-item--min-width: 100px;
 
   --gap-count: calc(var(--grid-column-count) - 1);
-  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --total-gap-width: calc(var(--gap-count) * var(--grid-gap));
   --grid-item--max-width: min(
     450px,
     calc((100% - var(--total-gap-width)) / var(--grid-column-count))
@@ -144,7 +145,7 @@ input[type="radio"] {
     auto-fit,
     minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
   );
-  grid-gap: var(--grid-layout-gap);
+  grid-gap: var(--grid-gap);
 }
 
 /* CARD LAYOUT */

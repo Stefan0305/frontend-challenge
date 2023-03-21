@@ -1,14 +1,15 @@
 import data from "./data.json" assert { type: "json" };
-let columSizeEl = document.getElementById("numberOfColumns");
-let cardContainer = document.getElementById("card-container");
 var rootEl = document.querySelector(":root");
-let cardsToShow = "dynamic";
+let cardContainer = document.getElementById("card-container");
 
 // loading cards data from JSON to local variable
 var localData = data;
 
 // deciding number of grid columns
-function dropdownHandler() {
+let columSizeEl = document.getElementById("numberOfColumns");
+let cardsToShow = "dynamic";
+
+function numberOfCardsDropdownHandler() {
   // just update global variable
   cardsToShow = columSizeEl.value;
 
@@ -24,7 +25,7 @@ function dropdownHandler() {
     }
   }
 }
-columSizeEl.addEventListener("change", dropdownHandler);
+columSizeEl.addEventListener("change", numberOfCardsDropdownHandler);
 
 function resizeHandler() {
   if (window.innerWidth < 768) {
@@ -47,6 +48,15 @@ function resizeHandler() {
   }
 }
 window.addEventListener("resize", resizeHandler);
+
+// change grid gap functionality
+let gapInput = document.getElementById("cardSpaceBetween");
+gapInput.addEventListener("input", gapDropdownHandler);
+
+function gapDropdownHandler() {
+  let gapValue = gapInput.value;
+  rootEl.style.setProperty("--grid-gap", gapValue);
+}
 
 // cards loading
 let loadCardsBtn = document.getElementById("load-card-btn");
