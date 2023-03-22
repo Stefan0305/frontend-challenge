@@ -229,6 +229,17 @@ input[type="radio"] {
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
+  width: min-content;
+  cursor: pointer;
+}
+
+.heart > path {
+  stroke: var(--card-text-clr);
+}
+
+.heart.active > path {
+  stroke: red;
+  fill: red;
 }
 
 .load-card-btn {
